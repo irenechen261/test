@@ -61,11 +61,11 @@ export async function parseCSVData(csvText: string): Promise<DataItem[]> {
           }
           
           resolve(dataItems);
-        } catch (error) {
+        } catch (error: any) {
           reject(error);
         }
       },
-      error: (error) => {
+      error: (error: any) => {
         reject(error);
       },
     });
