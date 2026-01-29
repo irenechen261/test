@@ -1,0 +1,125 @@
+====================================
+GitHub推送操作指南
+====================================
+
+由于Cursor IDE内置终端的环境变量限制，请使用以下方法之一推送代码到GitHub：
+
+方法1：使用PowerShell脚本（推荐）
+====================================
+
+1. 在文件资源管理器中打开：
+   D:\cursor\expense-dashboard
+
+2. 找到文件：一键推送GitHub.ps1
+
+3. 右键点击该文件，选择：
+   "使用 PowerShell 运行"
+   
+   如果没有这个选项，则：
+   - 右键点击文件 -> "打开方式" -> "PowerShell"
+
+4. 如果出现安全提示，按照以下步骤：
+   a. 以管理员身份打开PowerShell
+   b. 运行：Set-ExecutionPolicy RemoteSigned
+   c. 输入 Y 确认
+   d. 重新运行脚本
+
+5. 等待脚本完成，查看输出结果
+
+
+方法2：使用外部PowerShell手动执行
+====================================
+
+1. 按 Win + X，选择 "Windows PowerShell" 或 "终端"
+
+2. 进入项目目录：
+   cd D:\cursor\expense-dashboard
+
+3. 逐条执行以下命令：
+
+   # 初始化Git
+   git init
+
+   # 添加所有文件
+   git add .
+
+   # 创建提交
+   git commit -m "Initial commit: 费用Dashboard项目"
+
+   # 添加远程仓库
+   git remote add origin https://github.com/irenechen261/expense.git
+
+   # 切换到main分支
+   git branch -M main
+
+   # 推送到GitHub（使用--force强制推送）
+   git push -u origin main --force
+
+
+方法3：使用批处理文件
+====================================
+
+双击运行：推送到GitHub.bat
+
+或
+
+双击运行：完整部署流程.bat
+
+
+常见问题解决
+====================================
+
+Q: 推送时要求输入用户名和密码？
+A: 这是正常的GitHub身份验证：
+   - 用户名：您的GitHub用户名
+   - 密码：需要使用Personal Access Token（不能用GitHub密码）
+   
+   生成Token的步骤：
+   1. 访问：https://github.com/settings/tokens
+   2. 点击 "Generate new token (classic)"
+   3. 勾选 "repo" 权限
+   4. 点击生成
+   5. 复制token（只显示一次！）
+   6. 在推送时，密码处粘贴这个token
+
+
+Q: 推送失败，提示"remote origin already exists"？
+A: 运行：git remote remove origin
+   然后重新添加：git remote add origin https://github.com/irenechen261/expense.git
+
+
+Q: 推送失败，提示权限被拒绝？
+A: 1. 确认GitHub仓库确实存在
+   2. 确认您有该仓库的写入权限
+   3. 使用Personal Access Token而不是密码
+
+
+Q: 如何确认推送成功？
+A: 访问：https://github.com/irenechen261/expense
+   如果能看到项目文件，说明推送成功
+
+
+推送成功后的下一步
+====================================
+
+1. 访问 https://vercel.com
+2. 使用GitHub账号登录
+3. 点击 "Add New..." -> "Project"
+4. 选择 irenechen261/expense 仓库
+5. 点击 "Import"
+6. 保持默认设置，点击 "Deploy"
+7. 等待部署完成，获取URL
+
+详细的Vercel部署说明请查看：Vercel部署指南.md
+
+
+需要帮助？
+====================================
+
+如果遇到问题：
+1. 截图错误信息
+2. 查看 SETUP.md 文件中的详细说明
+3. 确保Git和Node.js已正确安装
+
+Git下载：https://git-scm.com/download/win
+Node.js下载：https://nodejs.org/zh-cn/
